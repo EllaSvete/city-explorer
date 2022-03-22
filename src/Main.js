@@ -12,24 +12,19 @@ class Main extends React.Component {
     console.log(parseLat, parseLon);
     return (
     <>
-        <main>
+    <main>
       <form onSubmit={this.props.submit}>
         <label>Pick a City
           <input type="text" onInput={this.props.handleCity} name="city"/>
         </label>
         <button type="submit">Explore!</button>
       </form>
-      {/* {this.state.error
-      ?
-      <p>{this.state.errorMessage}</p>
-      ://
-      <ul></ul>
-      } */}
     </main>
     <p>Lat: {this.props.lat}</p>
     <p>Lon: {this.props.lon}</p>
     <p>Name: {this.props.display_name}</p>
     <Map url={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${parseLat},${parseLon}&zoom=8`} name={this.props.name}/>
+  
 
     </>
     )

@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+h1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+form{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.image {
+ display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+body {
+  background-color: #9ce8be;
+}
