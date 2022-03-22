@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import './App.css';
 import axios from 'axios';
+// import CityCards from './CityCards';
 
 const API_KEY = process.env.REACT_APP_API_KEY
 
@@ -15,8 +16,8 @@ class App extends React.Component {
       lon: '',
       name: '',
       searchQuery: '',
-      // error: false,
-      // errorMessage: '',
+      error: false,
+      errorMessage: '',
     };
   }
 
@@ -28,29 +29,33 @@ class App extends React.Component {
   
   getCityData = async (e) => {
     e.preventDefault();
-    // try {
-      // get API data
+    try {
+      //get API data
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${this.state.searchQuery}&format=json`);
       this.setState({
         lat: cityData.data[0].lat,
         lon: cityData.data[0].lon,
         name: cityData.data[0].display_name,
       });
-      // } catch (error) {
-        //   this.setState({
-          //     error: true,
-          //     errorMessage: `An error occurred: ${error.response.status}`
-          //   })
-          // }
+      } catch (error) {
+          this.setState({
+              error: true,
+              errorMessage: `An error occurred: ${error.response.status}`
+            })
+          }
         };
         
         render() {
     console.log(this.state);
-    // let cityList = this.state.cityData.map(())
     return (
       <>
       <Header/>
       <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity}/>
+      {/* <CityCards
+       city={this.state.cityData.display_name}
+       lat={this.state.cityData.lat}
+       lon={this.state.cityData.lon}
+      /> */}
     <Footer/>
       </>
     )
