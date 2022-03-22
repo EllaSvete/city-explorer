@@ -11,42 +11,46 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      cityData: {},
+      lat: '',
+      lon: '',
+      name: '',
+      searchQuery: '',
+      // error: false,
+      // errorMessage: '',
     };
   }
 
   handleCity = (e) => {
     this.setState({
-      city: e.target.value
+      searchQuery: e.target.value
     });
   };
   
   getCityData = async (e) => {
     e.preventDefault();
-    // get API data
-    let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${this.state.city}&format=json`);
-    this.setState({
-      cityData: cityData.data[0],
-    });
-    console.log(this.state.cityData);
-  }
-  
-  render() {
+    // try {
+      // get API data
+      let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${this.state.searchQuery}&format=json`);
+      this.setState({
+        lat: cityData.data[0].lat,
+        lon: cityData.data[0].lon,
+        name: cityData.data[0].display_name,
+      });
+      // } catch (error) {
+        //   this.setState({
+          //     error: true,
+          //     errorMessage: `An error occurred: ${error.response.status}`
+          //   })
+          // }
+        };
+        
+        render() {
+    console.log(this.state);
+    // let cityList = this.state.cityData.map(())
     return (
       <>
       <Header/>
-      <Main/>
-    <main>
-      <form onSubmit={this.getCityData}>
-        <label>Pick a City
-          <input type="text" onInput={this.handleCity} name="city"/>
-        </label>
-        <button type="submit">Explore!</button>
-      </form>
-    </main>
-    <p>lon: {this.state.cityData.lon}</p>
-    <p>lat:{this.state.cityData.lat}</p>
-    <p>name:{this.state.cityData.display_name}</p>
+      <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity}/>
     <Footer/>
       </>
     )
