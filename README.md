@@ -29,3 +29,5 @@ Start time: ___2:10__
 Finish time: __5:10___
 
 Actual time needed to complete: _____
+
+const API_KEY = process.env.API_KEY
