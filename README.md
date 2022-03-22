@@ -33,3 +33,4 @@ Finish time: __5:10___
 
 Actual time needed to complete: __8:40___
 
+![White Board PNG](/whiteboard.png)
