@@ -1,8 +1,10 @@
 import React from 'react';
 import Map from './Map.js';
+import Weather from './Weather.js';
 // import Errormodal from './Errormodal.js';
 
 class Main extends React.Component {
+
 
 
   render() {
@@ -24,6 +26,9 @@ class Main extends React.Component {
     <p>Lon: {this.props.lon}</p>
     <p>Name: {this.props.name}</p>
     <Map url={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${parseLat},${parseLon}&zoom=8`} name={this.props.name}/>
+    <Weather weatherData={this.props.weatherData}
+    />
+  
 
   
     {/* {<p>Sorry city doesn't exist</p>}

@@ -9,7 +9,7 @@ import './App.css';
 const API_KEY = process.env.REACT_APP_API_KEY
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       lat: '',
@@ -19,6 +19,7 @@ class App extends React.Component {
       error: false,
       errorMessage: '',
       showModal: false,
+      weather: [],
     };
   }
   hideModal = () => {
@@ -38,7 +39,7 @@ class App extends React.Component {
       searchQuery: e.target.value
     });
   };
-  
+
   getCityData = async (e) => {
     e.preventDefault();
     try {
@@ -50,31 +51,51 @@ class App extends React.Component {
         lon: cityData.data[0].lon,
         name: cityData.data[0].display_name,
       });
-      } catch (error) {
-          this.setState({
-              error: true,
-              showModal: true,
-              errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
-              lat: '',
-              lon:'',
-              name:'',
-            });
-            console.log(this.state.errorMessage);
-          }
-        };
-        
-        render() {
+    } catch (error) {
+      this.setState({
+        error: true,
+        showModal: true,
+        errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
+        lat: '',
+        lon: '',
+        name: '',
+      });
+      console.log(this.state.errorMessage);
+    }
+    this.showWeather(this.state.lat, this.state.lon);
+  };
+
+  showWeather = async (lat, lon) => {
+    try {
+     const cityWeather = await axios.get(`${process.env.REACT_APP_SERVER}/weather`, {params:{lat: lat, lon: lon, city: this.state.searchQuery}})
+     console.log(cityWeather);
+     this.setState({
+       weather: cityWeather.data
+      })
+      console.log(cityWeather.data);
+    } catch(error) {
+      console.log(error.message);
+      this.setState({
+        error: true,
+        showModal: true,
+        errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
+      });
+
+    }
+  }
+
+  render() {
     console.log(this.state);
     return (
       <>
-      <Header/>
-      <Main   lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity}/>
-      {/* <CityCards
+        <Header />
+        <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity} weatherData={this.state.weather}/>
+        {/* <CityCards
        city={this.state.cityData.display_name}
        lat={this.state.cityData.lat}
        lon={this.state.cityData.lon}
       /> */}
-    <Footer/>
+        <Footer />
       </>
     );
   }
