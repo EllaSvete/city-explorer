@@ -2,8 +2,8 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import './App.css';
 import axios from 'axios';
+import './App.css';
 // import CityCards from './CityCards';
 
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -18,7 +18,19 @@ class App extends React.Component {
       searchQuery: '',
       error: false,
       errorMessage: '',
+      showModal: false,
     };
+  }
+  hideModal = () => {
+    this.setState({
+      showModal: false,
+    })
+  }
+
+  handleShowModal = () => {
+    this.setState({
+      showModal: true,
+    })
   }
 
   handleCity = (e) => {
@@ -32,6 +44,7 @@ class App extends React.Component {
     try {
       //get API data
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${this.state.searchQuery}&format=json`);
+      console.log(cityData);
       this.setState({
         lat: cityData.data[0].lat,
         lon: cityData.data[0].lon,
@@ -40,8 +53,13 @@ class App extends React.Component {
       } catch (error) {
           this.setState({
               error: true,
-              errorMessage: `An error occurred: ${error.response.status}`
-            })
+              showModal: true,
+              errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
+              lat: '',
+              lon:'',
+              name:'',
+            });
+            console.log(this.state.errorMessage);
           }
         };
         
@@ -50,7 +68,7 @@ class App extends React.Component {
     return (
       <>
       <Header/>
-      <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity}/>
+      <Main   lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity}/>
       {/* <CityCards
        city={this.state.cityData.display_name}
        lat={this.state.cityData.lat}
@@ -58,7 +76,7 @@ class App extends React.Component {
       /> */}
     <Footer/>
       </>
-    )
+    );
   }
 }
 
