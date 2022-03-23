@@ -1,5 +1,7 @@
 import React from 'react';
 import Map from './Map.js';
+import Weather from './Weather.js';
+// import Errormodal from './Errormodal.js';
 
 class Main extends React.Component {
 
@@ -11,7 +13,7 @@ class Main extends React.Component {
     let parseLon=parseInt(this.props.lon)
     console.log(parseLat, parseLon);
     return (
-    <>
+      <>
     <main>
       <form onSubmit={this.props.submit}>
         <label>Pick a City
@@ -22,11 +24,25 @@ class Main extends React.Component {
     </main>
     <p>Lat: {this.props.lat}</p>
     <p>Lon: {this.props.lon}</p>
-    <p>Name: {this.props.display_name}</p>
+    <p>Name: {this.props.name}</p>
     <Map url={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${parseLat},${parseLon}&zoom=8`} name={this.props.name}/>
+    <Weather weatherData={this.props.weatherData}
+    />
   
 
-    </>
+  
+    {/* {<p>Sorry city doesn't exist</p>}
+    <Errormodal 
+    error={this.state.error}
+    errorMessage={this.state.showModal}
+    modalState={this.state.showModal}
+    hideModal={this.hideModal}
+    handleShowModal={this.handleShowModal}
+    /> */}
+  
+  </>
+  
+
     )
   }
 };
