@@ -1,6 +1,7 @@
 import React from 'react';
 import Map from './Map.js';
 import Weather from './Weather.js';
+import Movies from './Movies.js';
 // import Errormodal from './Errormodal.js';
 
 class Main extends React.Component {
@@ -8,10 +9,10 @@ class Main extends React.Component {
 
 
   render() {
-    console.log(this.state);
+
     let parseLat=parseInt(this.props.lat)
     let parseLon=parseInt(this.props.lon)
-    console.log(parseLat, parseLon);
+   
     return (
       <>
     <main>
@@ -28,6 +29,9 @@ class Main extends React.Component {
     <Map url={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${parseLat},${parseLon}&zoom=8`} name={this.props.name}/>
     <Weather weatherData={this.props.weatherData}
     />
+    {this.props.movieData&&( <Movies movieData={this.props.movieData}
+    />)
+   }
   
 
   

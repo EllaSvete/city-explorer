@@ -20,6 +20,7 @@ class App extends React.Component {
       errorMessage: '',
       showModal: false,
       weather: [],
+      movies: [],
     };
   }
   hideModal = () => {
@@ -63,6 +64,7 @@ class App extends React.Component {
       console.log(this.state.errorMessage);
     }
     this.showWeather(this.state.lat, this.state.lon);
+    this.showMovies(this.state.searchQuery);
   };
 
   showWeather = async (lat, lon) => {
@@ -84,12 +86,28 @@ class App extends React.Component {
     }
   }
 
+  showMovies = async (city) => {
+
+    try {
+      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${city}`)
+      this.setState({
+        cityMovie: movieUrl.data,
+      });
+    } catch(error) {
+      this.setState({
+        error: true,
+        errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
+      });
+    }
+    console.log(this.state.cityMovie);
+  }
+
+
   render() {
-    console.log(this.state);
     return (
       <>
         <Header />
-        <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity} weatherData={this.state.weather}/>
+        <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity} weatherData={this.state.weather} movieData={this.state.cityMovie}/>
         {/* <CityCards
        city={this.state.cityData.display_name}
        lat={this.state.cityData.lat}
