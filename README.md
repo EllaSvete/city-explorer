@@ -34,4 +34,15 @@ Finish time: __5:10___
 Actual time needed to complete: __8:40___
 
 ![White Board PNG](/whiteboard.png)
-![WWRC LAB 8](/)
+
+Name of feature: _________Lab 8______________________
+
+Estimate of time needed to complete: __3___
+
+Start time: ___3__
+
+Finish time: __7:30___
+
+Actual time needed to complete: __4.5hrs___
+
+![WWRC LAB 8](/lab8.png)
