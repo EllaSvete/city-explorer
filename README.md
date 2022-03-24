@@ -21,7 +21,7 @@ Install react and build the components.
 
 ## Credit and Collaborations
 
-Ryan McMillan and Eden Brekke
+Ryan McMillan, Eden Brekke, Anthony Hill, Michelle Salazar
 
 Name of feature: _________Lab 6______________________
 
@@ -34,3 +34,4 @@ Finish time: __5:10___
 Actual time needed to complete: __8:40___
 
 ![White Board PNG](/whiteboard.png)
+![WWRC LAB 8](/)
