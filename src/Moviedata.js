@@ -1,14 +1,25 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 class Moviedata extends React.Component {
 
   render(){
     return (
-      <>
-      <h3>{this.props.movie.title}</h3> 
-      <p>Overview: {this.props.movie.description}</p> 
-      <p>Language: {this.props.movie.language}</p>
-      </>
+    
+      <Card key={this.props.index} border="primary" style={{ width: '18rem'}}>
+        <Card.Header>Text</Card.Header>
+        <Card.Img variant="top"/>
+        <Card.Body>
+          <Card.Title>{this.props.movie.title}</Card.Title>
+          <Card.Text>
+          {this.props.movie.description}
+             <p>Language: {this.props.movie.language}</p>
+          </Card.Text>
+        </Card.Body>
+
+      </Card>
+
+    
     );
   }
 }
