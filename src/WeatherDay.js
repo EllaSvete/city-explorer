@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Weatherdata extends React.Component {
+class WeatherDay extends React.Component {
 
   render(){
     return (
@@ -9,4 +9,4 @@ class Weatherdata extends React.Component {
   }
 }
 
-export default Weatherdata;
+export default WeatherDay;

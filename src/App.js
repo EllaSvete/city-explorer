@@ -45,7 +45,7 @@ class App extends React.Component {
     e.preventDefault();
     try {
       //get API data
-      let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${this.state.searchQuery}&format=json`);
+      let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${this.state.searchQuery}&format=json&limit=5`);
       console.log(cityData);
       this.setState({
         lat: cityData.data[0].lat,
@@ -82,7 +82,6 @@ class App extends React.Component {
         showModal: true,
         errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
       });
-
     }
   }
 
@@ -107,12 +106,14 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <Main lat={this.state.lat} lon={this.state.lon} name={this.state.name} submit={this.getCityData} handleCity={this.handleCity} weatherData={this.state.weather} movieData={this.state.cityMovie}/>
-        {/* <CityCards
-       city={this.state.cityData.display_name}
-       lat={this.state.cityData.lat}
-       lon={this.state.cityData.lon}
-      /> */}
+        <Main 
+        lat={this.state.lat} 
+        lon={this.state.lon} 
+        name={this.state.name} 
+        submit={this.getCityData}
+        handleCity={this.handleCity} 
+        weatherData={this.state.weather} 
+        movieData={this.state.cityMovie}/>
         <Footer />
       </>
     );
