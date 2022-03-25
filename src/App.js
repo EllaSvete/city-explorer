@@ -74,13 +74,13 @@ class App extends React.Component {
      this.setState({
        weather: cityWeather.data
       })
-      console.log(cityWeather.data);
+      console.log(this.state.weather);
     } catch(error) {
       console.log(error.message);
       this.setState({
         error: true,
         showModal: true,
-        errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
+        errorMessage: `An error occurred: ${error.response} ${error.response}`,
       });
     }
   }
@@ -95,7 +95,7 @@ class App extends React.Component {
     } catch(error) {
       this.setState({
         error: true,
-        errorMessage: `An error occurred: ${error.response.status} ${error.response.statusText}`,
+        errorMessage: `An error occurred: ${error.response} ${error.response}`,
       });
     }
     console.log(this.state.cityMovie);
