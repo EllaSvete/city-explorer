@@ -7,8 +7,8 @@ import Movies from './Movies.js';
 class Main extends React.Component {
   render() {
 
-    let parseLat=parseInt(this.props.lat)
-    let parseLon=parseInt(this.props.lon)
+    // let parseLat=parseInt(this.props.lat)
+    // let parseLon=parseInt(this.props.lon)
    
     return (
       <>
